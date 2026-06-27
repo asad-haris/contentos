@@ -6,6 +6,7 @@ Provides a premium dashboard to visualize the multi-agent production pipeline in
 import os
 import sys
 import uuid
+import time
 import asyncio
 import threading
 from flask import Flask, render_template_string, request, jsonify
@@ -47,6 +48,20 @@ if mock_mode:
 
 # Global session store
 SESSIONS = {}
+
+def cleanup_old_sessions():
+    """Removes sessions older than 30 minutes (1800 seconds) from the in-memory SESSIONS dict."""
+    now = time.time()
+    expired = []
+    for sid, sdata in list(SESSIONS.items()):
+        created = sdata.get("created_at", now)
+        if now - created > 1800:
+            expired.append(sid)
+    for sid in expired:
+        try:
+            del SESSIONS[sid]
+        except KeyError:
+            pass
 
 # Background event loop for running async ADK runners
 background_loop = asyncio.new_event_loop()
@@ -560,6 +575,14 @@ HTML_TEMPLATE = """
             const prompt = document.getElementById("prompt").value.trim();
             if (!prompt) return alert("Please enter a prompt.");
             
+            // Clear any active polling and local storage state
+            if (pollInterval) {
+                clearInterval(pollInterval);
+                pollInterval = null;
+            }
+            localStorage.removeItem("contentos_session_id");
+            currentSessionId = null;
+            
             document.getElementById("submit-btn").disabled = true;
             document.getElementById("submit-btn").innerText = "Initializing...";
             document.getElementById("status-panel").style.display = "block";
@@ -897,6 +920,7 @@ def index():
 
 @app.route("/api/generate", methods=["POST"])
 def generate():
+    cleanup_old_sessions()
     data = request.get_json() or {}
     prompt = data.get("prompt", "").strip()
     if not prompt:
@@ -904,6 +928,7 @@ def generate():
         
     session_id = str(uuid.uuid4())
     SESSIONS[session_id] = {
+        "created_at": time.time(),
         "status": "running",
         "topic": prompt,
         "current_node": "OrchestratorAgent",
@@ -922,8 +947,10 @@ def generate():
     asyncio.run_coroutine_threadsafe(run_pipeline(session_id, prompt), background_loop)
     return jsonify({"session_id": session_id})
 
+@app.route("/status/<session_id>", methods=["GET"])
 @app.route("/api/session/<session_id>", methods=["GET"])
 def get_session(session_id):
+    cleanup_old_sessions()
     session_data = SESSIONS.get(session_id)
     if not session_data:
         return jsonify({"error": "Session not found"}), 404
@@ -944,6 +971,7 @@ def get_session(session_id):
 
 @app.route("/api/session/<session_id>/action", methods=["POST"])
 def session_action(session_id):
+    cleanup_old_sessions()
     session_data = SESSIONS.get(session_id)
     if not session_data:
         return jsonify({"error": "Session not found"}), 404
