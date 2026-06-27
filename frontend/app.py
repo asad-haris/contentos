@@ -202,367 +202,578 @@ async def run_pipeline(session_id, topic):
         SESSIONS[session_id]["error_message"] = str(e)
         print(f"Global pipeline exception {session_id}: {e}", file=sys.stderr)
 
-# Premium Responsive HTML/CSS UI Template
+# Premium Brutalist Minimalist HTML/CSS UI Template
 HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ContentOS - Multi-Agent Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>CONTENTOS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <!-- marked.js for premium markdown script rendering -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         :root {
-            --bg-primary: #0a0c10;
-            --bg-secondary: #121620;
-            --accent-color: #6366f1;
-            --accent-hover: #4f46e5;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border-color: #1e293b;
+            --bg: #0a0a0a;
+            --fg: #f0f0f0;
+            --accent: #ffffff;
+            --highlight: #7c6af7;
+            --border: #222222;
+            --border-hover: #ffffff;
+            --dim: #555555;
         }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            border-radius: 0 !important; /* brutalist: strictly no rounded corners */
+        }
+
         body {
-            margin: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text-main);
+            background-color: var(--bg);
+            color: var(--fg);
+            font-family: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 14px;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
         }
-        header {
-            border-bottom: 1px solid var(--border-color);
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-between: space-between;
-            align-items: center;
-            background: rgba(18, 22, 32, 0.8);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        .header-title-container {
-            display: flex;
-            flex-direction: column;
-        }
-        h1 {
-            margin: 0;
-            font-size: 1.5rem;
+
+        /* Utility style for section headers */
+        .label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--dim);
             font-weight: 700;
-            background: linear-gradient(135deg, #a5b4fc, #6366f1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 3rem auto;
-            padding: 0 1.5rem;
-            flex-grow: 1;
-        }
-        .card {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            margin-bottom: 2rem;
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        label {
+            margin-bottom: 0.75rem;
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-muted);
         }
-        textarea, input, select {
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            height: 60px;
+        }
+
+        header h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .header-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--dim);
+        }
+
+        /* Layout Grid */
+        .main-layout {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 60px);
+            overflow: hidden;
+        }
+
+        .panel-left {
+            width: 40%;
+            border-right: 1px solid var(--border);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            gap: 2.5rem;
+        }
+
+        .panel-right {
+            width: 60%;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Input section styling */
+        textarea {
             width: 100%;
-            background: #07090e;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1rem;
-            color: var(--text-main);
+            background-color: #111111;
+            border: 1px solid var(--border);
+            color: var(--fg);
             font-family: inherit;
             font-size: 1rem;
-            box-sizing: border-box;
+            padding: 1rem;
+            resize: none;
+            outline: none;
             transition: border-color 0.2s;
         }
-        textarea:focus, input:focus, select:focus {
-            outline: none;
-            border-color: var(--accent-color);
+
+        textarea:focus {
+            border-color: var(--border-hover);
         }
+
         button {
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            font-weight: 600;
+            display: block;
+            width: 100%;
+            background-color: var(--accent);
+            color: #000000;
+            border: 1px solid var(--accent);
+            padding: 1rem;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
+            transition: all 0.2s;
         }
+
         button:hover {
-            background: var(--accent-hover);
+            background-color: var(--bg);
+            color: var(--accent);
+            border-color: var(--accent);
         }
-        button:active {
-            transform: scale(0.98);
+
+        button:disabled {
+            background-color: var(--border);
+            color: var(--dim);
+            border-color: var(--border);
+            cursor: not-allowed;
         }
-        .status-panel {
-            margin-top: 2rem;
-            display: none;
+
+        .status-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--highlight);
+            text-transform: uppercase;
         }
-        .agent-node {
+
+        /* Agent status list */
+        .agent-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .agent-row {
             display: flex;
             align-items: center;
-            gap: 1rem;
             padding: 1rem;
-            background: #0d1117;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            margin-bottom: 0.75rem;
-            transition: transform 0.2s, border-color 0.2s;
+            border: 1px solid var(--border);
+            background-color: #0d0d0d;
         }
-        .agent-node.clickable {
-            cursor: pointer;
-            border-color: rgba(99, 102, 241, 0.4);
+
+        .agent-status-dot {
+            width: 8px;
+            height: 8px;
+            margin-right: 1rem;
+            background-color: #333333; /* default idle */
         }
-        .agent-node.clickable:hover {
-            transform: translateX(5px);
-            border-color: var(--accent-color);
-            background: #161b26;
+
+        .agent-status-dot.active {
+            background-color: #eab308; /* yellow */
+            box-shadow: 0 0 8px #eab308;
         }
-        .agent-status {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--text-muted);
-            transition: all 0.3s;
+
+        .agent-status-dot.done {
+            background-color: #22c55e; /* green */
+            box-shadow: 0 0 8px #22c55e;
         }
-        .agent-status.active {
-            background: #eab308;
-            box-shadow: 0 0 10px #eab308;
-            animation: pulse-yellow 1.5s infinite;
+
+        .agent-status-dot.failed {
+            background-color: #ef4444; /* red */
+            box-shadow: 0 0 8px #ef4444;
         }
-        .agent-status.done {
-            background: #22c55e;
-            box-shadow: 0 0 10px #22c55e;
-        }
-        @keyframes pulse-yellow {
-            0% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(234, 179, 8, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0); }
-        }
-        .agent-name {
-            font-weight: 600;
-        }
-        .clickable-badge {
-            margin-left: auto;
+
+        .agent-name-label {
+            font-weight: 700;
             font-size: 0.8rem;
-            background: rgba(99, 102, 241, 0.15);
-            color: #818cf8;
-            padding: 0.25rem 0.6rem;
-            border-radius: 12px;
-            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .view-link {
+            margin-left: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--highlight);
+            text-decoration: none;
+            text-transform: uppercase;
+            border-bottom: 1px dashed var(--highlight);
+            cursor: pointer;
+        }
+
+        .view-link:hover {
+            color: var(--accent);
+            border-bottom-style: solid;
+        }
+
+        /* Right panel content states */
+        .state-empty {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            color: var(--dim);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .review-card {
             display: none;
+            flex-direction: column;
+            gap: 1.5rem;
+            animation: fadeIn 0.3s;
         }
-        .agent-node.clickable .clickable-badge {
-            display: inline-block;
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        
-        /* Modal styling */
+
+        .hook-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #ffffff;
+            border-left: 4px solid var(--highlight);
+            padding-left: 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .metadata-row {
+            display: flex;
+            gap: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--dim);
+        }
+
+        .titles-list {
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .titles-list li {
+            padding: 0.75rem 1rem;
+            background-color: #111111;
+            border-left: 2px solid var(--accent);
+            font-size: 0.95rem;
+        }
+
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag-chip {
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--fg);
+        }
+
+        .brief-block {
+            border: 1px solid var(--border);
+            background-color: #0f0f0f;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .sources-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+        }
+
+        .source-a {
+            color: var(--highlight);
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .source-a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        .review-button-row {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-approve {
+            background-color: #22c55e;
+            border-color: #22c55e;
+            color: #ffffff;
+        }
+
+        .btn-approve:hover {
+            background-color: var(--bg);
+            color: #22c55e;
+        }
+
+        .btn-reject {
+            background-color: #ef4444;
+            border-color: #ef4444;
+            color: #ffffff;
+            width: 30%;
+        }
+
+        .btn-reject:hover {
+            background-color: var(--bg);
+            color: #ef4444;
+        }
+
+        .revision-form {
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .select-target {
+            width: 100%;
+            background-color: #111111;
+            border: 1px solid var(--border);
+            color: var(--fg);
+            padding: 0.75rem;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .btn-revise {
+            background-color: var(--highlight);
+            border-color: var(--highlight);
+            color: #ffffff;
+        }
+
+        .btn-revise:hover {
+            background-color: var(--bg);
+            color: var(--highlight);
+        }
+
+        /* Modal Overlay */
         .modal {
             display: none;
             position: fixed;
             z-index: 100;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(4px);
         }
+
         .modal-content {
-            background-color: var(--bg-secondary);
-            margin: 8% auto;
-            padding: 2.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            width: 85%;
+            background-color: var(--bg);
+            border: 1px solid var(--border);
+            width: 80%;
             max-width: 800px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            margin: 5% auto;
+            display: flex;
+            flex-direction: column;
+            height: 80vh;
         }
-        .close-btn {
-            color: var(--text-muted);
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-title {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--fg);
+            font-size: 1.5rem;
             cursor: pointer;
+            padding: 0.25rem;
+            width: auto;
         }
-        .close-btn:hover {
-            color: var(--text-main);
+
+        .modal-close:hover {
+            color: var(--highlight);
         }
+
         .modal-body {
-            margin-top: 1.5rem;
-            max-height: 500px;
+            flex: 1;
             overflow-y: auto;
-            line-height: 1.6;
-        }
-        .pre-wrap {
+            padding: 2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
             white-space: pre-wrap;
+        }
+
+        /* Markdown styling inside Modal */
+        .markdown-output {
+            white-space: normal;
             font-family: inherit;
         }
-        
-        /* Review Panel */
-        .review-panel {
-            display: none;
-            background: rgba(99, 102, 241, 0.03);
-            border: 1px dashed var(--accent-color);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-top: 2rem;
+
+        .markdown-output h1, .markdown-output h2, .markdown-output h3 {
+            margin: 1.5rem 0 0.75rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #ffffff;
         }
-        .review-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        .btn-approve { background-color: #22c55e; }
-        .btn-approve:hover { background-color: #16a34a; }
-        .btn-reject { background-color: #ef4444; }
-        .btn-reject:hover { background-color: #dc2626; }
-        .revision-section {
-            margin-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 1.5rem;
-        }
-        .btn-revise { background-color: #f59e0b; }
-        .btn-revise:hover { background-color: #d97706; }
-        
-        /* Lists and formatting inside modals */
-        .source-item {
-            background: #0d1117;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 0.75rem;
-        }
-        .source-link {
-            color: #818cf8;
-            text-decoration: none;
-            word-break: break-all;
-        }
-        .source-link:hover {
-            text-decoration: underline;
+
+        .markdown-output h1 { font-size: 1.2rem; }
+        .markdown-output h2 { font-size: 1rem; }
+        .markdown-output p {
+            margin-bottom: 1rem;
+            color: #d0d0d0;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-title-container">
-            <h1>ContentOS</h1>
-        </div>
-        <div style="color: var(--text-muted); font-size: 0.9rem;">Google ADK 2.0 Live Dashboard</div>
+        <h1>CONTENTOS</h1>
+        <div class="header-tag">Google ADK 2.0 • Multi-Agent System</div>
     </header>
-    
-    <div class="container">
-        <div class="card">
-            <h2 style="margin-top: 0; font-size: 1.75rem; font-weight: 600;">Produce New Content</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">
-                Enter your topic or prompt. The real Orchestrator Agent will delegate research, scriptwriting, SEO optimization, and final review to specialized agents.
-            </p>
-            <div class="form-group">
-                <label for="prompt">Content Prompt / Topic</label>
-                <textarea id="prompt" rows="3" placeholder="e.g., Why Gen Z is burnt out before they even start their careers..."></textarea>
-            </div>
-            <button id="submit-btn" onclick="startRealProduction()">Generate Content</button>
 
-            <div id="status-panel" class="status-panel">
-                <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <span>Production Pipeline</span>
-                    <span id="pipeline-status" style="font-size: 0.9rem; font-weight: 500; color: var(--accent-color); padding: 0.2rem 0.5rem; background: rgba(99, 102, 241, 0.1); border-radius: 4px;">RUNNING</span>
-                </h3>
-                
-                <div id="node-orchestrator" class="agent-node" onclick="viewNodeOutput('OrchestratorAgent')">
-                    <div id="dot-orchestrator" class="agent-status"></div>
-                    <span class="agent-name">Orchestrator Agent</span>
-                    <span class="clickable-badge">View Output</span>
+    <div class="main-layout">
+        <!-- LEFT PANEL -->
+        <div class="panel-left">
+            <div>
+                <span class="label">INPUT</span>
+                <textarea id="prompt" rows="4" placeholder="Enter topic / idea prompt..."></textarea>
+                <button id="submit-btn" style="margin-top: 1rem;" onclick="startRealProduction()">GENERATE →</button>
+                <div style="margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                    <span class="label" style="margin-bottom: 0;">Status:</span>
+                    <span id="pipeline-status" class="status-text">IDLE</span>
                 </div>
-                
-                <div id="node-research" class="agent-node" onclick="viewNodeOutput('ResearchAgent')">
-                    <div id="dot-research" class="agent-status"></div>
-                    <span class="agent-name">Research Agent</span>
-                    <span class="clickable-badge">View Output</span>
-                </div>
-                
-                <div id="node-script" class="agent-node" onclick="viewNodeOutput('ScriptAgent')">
-                    <div id="dot-script" class="agent-status"></div>
-                    <span class="agent-name">Script Agent</span>
-                    <span class="clickable-badge">View Output</span>
-                </div>
-                
-                <div id="node-seo" class="agent-node" onclick="viewNodeOutput('SEOAgent')">
-                    <div id="dot-seo" class="agent-status"></div>
-                    <span class="agent-name">SEO Agent</span>
-                    <span class="clickable-badge">View Output</span>
-                </div>
-                
-                <div id="node-review" class="agent-node" onclick="viewNodeOutput('ReviewAgent')">
-                    <div id="dot-review" class="agent-status"></div>
-                    <span class="agent-name">Review Agent</span>
-                    <span class="clickable-badge">View Output</span>
+            </div>
+
+            <div id="status-panel" style="display: none; flex-direction: column; gap: 0.5rem; flex: 1;">
+                <span class="label">PIPELINE STATUS</span>
+                <div class="agent-list">
+                    <div id="node-orchestrator" class="agent-row">
+                        <div id="dot-orchestrator" class="agent-status-dot"></div>
+                        <span class="agent-name-label">Orchestrator Agent</span>
+                        <span id="view-orchestrator" class="view-link" style="display: none;" onclick="viewNodeOutput('OrchestratorAgent')">VIEW OUTPUT</span>
+                    </div>
+                    <div id="node-research" class="agent-row">
+                        <div id="dot-research" class="agent-status-dot"></div>
+                        <span class="agent-name-label">Research Agent</span>
+                        <span id="view-research" class="view-link" style="display: none;" onclick="viewNodeOutput('ResearchAgent')">VIEW OUTPUT</span>
+                    </div>
+                    <div id="node-script" class="agent-row">
+                        <div id="dot-script" class="agent-status-dot"></div>
+                        <span class="agent-name-label">Script Agent</span>
+                        <span id="view-script" class="view-link" style="display: none;" onclick="viewNodeOutput('ScriptAgent')">VIEW OUTPUT</span>
+                    </div>
+                    <div id="node-seo" class="agent-row">
+                        <div id="dot-seo" class="agent-status-dot"></div>
+                        <span class="agent-name-label">SEO Agent</span>
+                        <span id="view-seo" class="view-link" style="display: none;" onclick="viewNodeOutput('SEOAgent')">VIEW OUTPUT</span>
+                    </div>
+                    <div id="node-review" class="agent-row">
+                        <div id="dot-review" class="agent-status-dot"></div>
+                        <span class="agent-name-label">Review Agent</span>
+                        <span id="view-review" class="view-link" style="display: none;" onclick="viewNodeOutput('ReviewAgent')">VIEW OUTPUT</span>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- HITL Review Gate Panel -->
-        <div id="review-panel" class="review-panel card">
-            <h2 style="margin-top: 0; color: var(--accent-color); font-size: 1.5rem;">Human-In-The-Loop Review Gate</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-                The agents have compiled a content draft. Review the summary details below, check for warnings, and choose to Approve, Reject, or request a Revision.
-            </p>
-            
-            <div id="review-summary" style="background: #0d1117; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
-                <!-- Filled dynamically -->
+
+        <!-- RIGHT PANEL -->
+        <div class="panel-right">
+            <div id="state-empty" class="state-empty">
+                AWAITING INPUT
             </div>
-            
-            <div class="review-actions">
-                <button class="btn-approve" onclick="submitReviewAction('APPROVE')">Approve & Save Output</button>
-                <button class="btn-reject" onclick="submitReviewAction('REJECT')">Reject & Discard Draft</button>
-            </div>
-            
-            <div class="revision-section">
-                <h3 style="margin-top: 0; font-size: 1.2rem;">Request Revision</h3>
-                <div class="form-group">
-                    <label for="revision-target">Target Agent for Revision</label>
+
+            <!-- HITL Review Gate Panel -->
+            <div id="review-panel" class="review-card">
+                <div>
+                    <span class="label">HUMAN REVIEW REQUIRED</span>
+                    <div id="review-warning" style="display: none;"></div>
+                    <div id="review-hook" class="hook-text"></div>
+                    <div class="metadata-row" style="margin-top: 1rem;">
+                        <span id="review-wordcount"></span>
+                        <span id="review-duration"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="label">SEO TITLE SUGGESTIONS</span>
+                    <ol id="review-titles" class="titles-list"></ol>
+                </div>
+
+                <div>
+                    <span class="label">SEO TAGS</span>
+                    <div id="review-tags" class="tags-container"></div>
+                </div>
+
+                <div>
+                    <span class="label">THUMBNAIL BRIEF</span>
+                    <div id="review-thumbnail" class="brief-block"></div>
+                </div>
+
+                <div>
+                    <span class="label">SOURCES CITED</span>
+                    <div id="review-sources" class="sources-list"></div>
+                </div>
+
+                <div class="review-button-row">
+                    <button class="btn-approve" onclick="submitReviewAction('APPROVE')">APPROVE →</button>
+                    <button class="btn-reject" onclick="submitReviewAction('REJECT')">REJECT</button>
+                </div>
+
+                <div class="revision-form">
+                    <span class="label">REQUEST REVISION</span>
                     <select id="revision-target" class="select-target">
                         <option value="ResearchAgent">ResearchAgent (Re-run from Research stage)</option>
                         <option value="ScriptAgent" selected>ScriptAgent (Re-draft script & SEO)</option>
                         <option value="SEOAgent">SEOAgent (Regenerate titles/tags only)</option>
                     </select>
+                    <textarea id="revision-notes" rows="3" placeholder="Specify changes required..."></textarea>
+                    <button class="btn-revise" onclick="submitReviewAction('REVISE')">SEND BACK</button>
                 </div>
-                <div class="form-group">
-                    <label for="revision-notes">Feedback & Specific Guidance</label>
-                    <textarea id="revision-notes" rows="3" placeholder="Explain what changes are needed (e.g. adjust hook, include details about McKinsey sources, etc.)"></textarea>
-                </div>
-                <button class="btn-revise" onclick="submitReviewAction('REVISE')">Send Back for Revision</button>
             </div>
         </div>
     </div>
-    
+
     <!-- Detail Modal -->
     <div id="detail-modal" class="modal">
-        <div class="modal-content card">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2 id="modal-title" style="margin-top: 0; font-size: 1.5rem;">Agent Output</h2>
-            <div id="modal-body" class="modal-body">
-                <!-- Filled dynamically -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title" class="modal-title">Agent Output</h2>
+                <button class="modal-close" onclick="closeModal()">✕</button>
             </div>
+            <div id="modal-body" class="modal-body"></div>
         </div>
     </div>
 
@@ -584,18 +795,19 @@ HTML_TEMPLATE = """
             currentSessionId = null;
             
             document.getElementById("submit-btn").disabled = true;
-            document.getElementById("submit-btn").innerText = "Initializing...";
-            document.getElementById("status-panel").style.display = "block";
+            document.getElementById("submit-btn").innerText = "INITIALIZING...";
+            document.getElementById("status-panel").style.display = "flex";
             document.getElementById("review-panel").style.display = "none";
+            document.getElementById("state-empty").style.display = "flex";
+            document.getElementById("state-empty").innerText = "PIPELINE RUNNING...";
             document.getElementById("pipeline-status").innerText = "RUNNING";
-            document.getElementById("pipeline-status").style.color = "var(--accent-color)";
-            document.getElementById("pipeline-status").style.background = "rgba(99, 102, 241, 0.1)";
+            document.getElementById("pipeline-status").style.color = "var(--highlight)";
 
             // Reset UI nodes
             const steps = ['orchestrator', 'research', 'script', 'seo', 'review'];
             steps.forEach(s => {
-                document.getElementById(`dot-${s}`).className = 'agent-status';
-                document.getElementById(`node-${s}`).classList.remove('clickable');
+                document.getElementById(`dot-${s}`).className = 'agent-status-dot';
+                document.getElementById(`view-${s}`).style.display = 'none';
             });
             
             fetch('/api/generate', {
@@ -612,7 +824,7 @@ HTML_TEMPLATE = """
                 }
                 currentSessionId = data.session_id;
                 localStorage.setItem("contentos_session_id", currentSessionId);
-                document.getElementById("submit-btn").innerText = "Generating...";
+                document.getElementById("submit-btn").innerText = "GENERATING...";
                 // Start polling
                 pollInterval = setInterval(pollSessionStatus, 1500);
             })
@@ -624,7 +836,7 @@ HTML_TEMPLATE = """
 
         function resetLaunchButton() {
             document.getElementById("submit-btn").disabled = false;
-            document.getElementById("submit-btn").innerText = "Generate Content";
+            document.getElementById("submit-btn").innerText = "GENERATE →";
         }
 
         function pollSessionStatus() {
@@ -648,72 +860,70 @@ HTML_TEMPLATE = """
                 { name: 'ReviewAgent', id: 'review' }
             ];
 
-            // 1. Identify current node and progress
             const currentNodeName = session.current_node;
             
             // Mark completed nodes based on output availability
             if (session.research_brief) {
-                document.getElementById('dot-research').className = 'agent-status done';
-                document.getElementById('node-research').classList.add('clickable');
-                document.getElementById('dot-orchestrator').className = 'agent-status done';
-                document.getElementById('node-orchestrator').classList.add('clickable');
+                document.getElementById('dot-research').className = 'agent-status-dot done';
+                document.getElementById('view-research').style.display = 'inline-block';
+                document.getElementById('dot-orchestrator').className = 'agent-status-dot done';
+                document.getElementById('view-orchestrator').style.display = 'inline-block';
             }
             if (session.script_package) {
-                document.getElementById('dot-script').className = 'agent-status done';
-                document.getElementById('node-script').classList.add('clickable');
+                document.getElementById('dot-script').className = 'agent-status-dot done';
+                document.getElementById('view-script').style.display = 'inline-block';
             }
             if (session.seo_package) {
-                document.getElementById('dot-seo').className = 'agent-status done';
-                document.getElementById('node-seo').classList.add('clickable');
+                document.getElementById('dot-seo').className = 'agent-status-dot done';
+                document.getElementById('view-seo').style.display = 'inline-block';
             }
             
             // Set active dot
             if (currentNodeName) {
                 steps.forEach(step => {
                     if (step.name === currentNodeName) {
-                        document.getElementById(`dot-${step.id}`).className = 'agent-status active';
+                        document.getElementById(`dot-${step.id}`).className = 'agent-status-dot active';
                     }
                 });
             }
 
-            // 2. Handle specific statuses
+            // Handle statuses
             if (session.status === "waiting_for_review") {
-                document.getElementById('dot-review').className = 'agent-status active';
-                document.getElementById('node-review').classList.add('clickable');
+                document.getElementById('dot-review').className = 'agent-status-dot active';
+                document.getElementById('view-review').style.display = 'inline-block';
                 document.getElementById("pipeline-status").innerText = "AWAITING HUMAN REVIEW";
-                document.getElementById("pipeline-status").style.color = "#f59e0b";
-                document.getElementById("pipeline-status").style.background = "rgba(245, 158, 11, 0.1)";
+                document.getElementById("pipeline-status").style.color = "var(--highlight)";
                 
                 showReviewPanel(session.review_args);
             } else if (session.status === "approved" || session.status === "completed") {
                 clearInterval(pollInterval);
-                localStorage.removeItem("contentos_session_id");
-                document.getElementById('dot-review').className = 'agent-status done';
-                document.getElementById('node-review').classList.add('clickable');
+                document.getElementById('dot-review').className = 'agent-status-dot done';
+                document.getElementById('view-review').style.display = 'inline-block';
                 document.getElementById("pipeline-status").innerText = "APPROVED & COMPLETED";
                 document.getElementById("pipeline-status").style.color = "#22c55e";
-                document.getElementById("pipeline-status").style.background = "rgba(34, 197, 94, 0.1)";
                 document.getElementById("review-panel").style.display = "none";
+                document.getElementById("state-empty").style.display = "flex";
+                document.getElementById("state-empty").innerText = "PIPELINE COMPLETED - APPROVED";
                 resetLaunchButton();
                 
                 alert(`Content generation successfully approved! Output folder:\n${session.saved_directory}`);
             } else if (session.status === "rejected") {
                 clearInterval(pollInterval);
-                localStorage.removeItem("contentos_session_id");
                 document.getElementById("pipeline-status").innerText = "REJECTED";
                 document.getElementById("pipeline-status").style.color = "#ef4444";
-                document.getElementById("pipeline-status").style.background = "rgba(239, 68, 68, 0.1)";
                 document.getElementById("review-panel").style.display = "none";
+                document.getElementById("state-empty").style.display = "flex";
+                document.getElementById("state-empty").innerText = "PIPELINE TERMINATED - REJECTED";
                 resetLaunchButton();
                 
                 alert("Content package draft was rejected.");
             } else if (session.status === "error") {
                 clearInterval(pollInterval);
-                localStorage.removeItem("contentos_session_id");
                 document.getElementById("pipeline-status").innerText = "ERROR";
                 document.getElementById("pipeline-status").style.color = "#ef4444";
-                document.getElementById("pipeline-status").style.background = "rgba(239, 68, 68, 0.1)";
                 document.getElementById("review-panel").style.display = "none";
+                document.getElementById("state-empty").style.display = "flex";
+                document.getElementById("state-empty").innerText = "PIPELINE FAILED - ERROR";
                 resetLaunchButton();
                 
                 alert("Execution error occurred: " + session.error_message);
@@ -721,39 +931,59 @@ HTML_TEMPLATE = """
         }
 
         function showReviewPanel(args) {
+            document.getElementById("state-empty").style.display = "none";
             const panel = document.getElementById("review-panel");
-            if (panel.style.display === "block") return; // already showing
+            if (panel.style.display === "flex") return; 
             
-            const summaryDiv = document.getElementById("review-summary");
-            let titlesHtml = "";
-            (args.titles || []).forEach((t, i) => {
-                titlesHtml += `<div><strong>Title ${i+1}:</strong> ${t}</div>`;
-            });
-            
-            let warningHtml = "";
+            // Warnings
+            const warningEl = document.getElementById("review-warning");
             if (args.unverified_claims_detected) {
-                warningHtml = `<div style="color: #f87171; border: 1px solid #ef4444; background: rgba(239, 68, 68, 0.1); padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem; font-weight: 600;">
-                                ⚠️ WARNING: Unverified claims detected in script! (Not backed by research brief)
-                               </div>`;
+                warningEl.style.display = "block";
+                warningEl.innerHTML = `<div style="color: #ef4444; border: 1px solid #ef4444; background: rgba(239, 68, 68, 0.05); padding: 1rem; margin-bottom: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em;">
+                                        ⚠️ WARNING: UNVERIFIED CLAIMS DETECTED IN SCRIPT (NOT BACKED BY SOURCES)
+                                       </div>`;
+            } else {
+                warningEl.style.display = "none";
             }
             
-            summaryDiv.innerHTML = `
-                ${warningHtml}
-                <div style="margin-bottom: 0.75rem;"><strong>Hook:</strong> <span class="pre-wrap">${args.hook || 'N/A'}</span></div>
-                <div style="margin-bottom: 0.75rem;"><strong>Word Count:</strong> ${args.word_count || 'N/A'} words</div>
-                <div style="margin-bottom: 0.75rem;"><strong>Estimated Duration:</strong> ${args.estimated_duration || 'N/A'} seconds</div>
-                <div style="margin-bottom: 0.75rem; border-top: 1px solid var(--border-color); padding-top: 0.75rem;">
-                    <strong>SEO Title Suggestions:</strong>
-                    <div style="margin-top: 0.5rem; padding-left: 1rem; display: flex; flex-direction: column; gap: 0.25rem;">
-                        ${titlesHtml}
-                    </div>
-                </div>
-                <div style="margin-bottom: 0.75rem;"><strong>SEO Tags:</strong> ${(args.tags || []).join(', ')}</div>
-                <div style="margin-bottom: 0.75rem;"><strong>Thumbnail Design Brief:</strong> <span class="pre-wrap">${args.thumbnail_brief || 'N/A'}</span></div>
-                <div><strong>Sources Cited:</strong> ${(args.sources_cited || []).join(', ')}</div>
-            `;
+            document.getElementById("review-hook").innerText = args.hook || 'N/A';
+            document.getElementById("review-wordcount").innerText = `WORD COUNT: ${args.word_count || 'N/A'}`;
+            document.getElementById("review-duration").innerText = `EST. DURATION: ${args.estimated_duration || 'N/A'}`;
             
-            panel.style.display = "block";
+            // Titles
+            const titlesOl = document.getElementById("review-titles");
+            titlesOl.innerHTML = "";
+            (args.titles || []).forEach(t => {
+                const li = document.createElement("li");
+                li.innerText = t;
+                titlesOl.appendChild(li);
+            });
+            
+            // Tags
+            const tagsDiv = document.getElementById("review-tags");
+            tagsDiv.innerHTML = "";
+            (args.tags || []).forEach(tag => {
+                const span = document.createElement("span");
+                span.className = "tag-chip";
+                span.innerText = tag;
+                tagsDiv.appendChild(span);
+            });
+            
+            document.getElementById("review-thumbnail").innerText = args.thumbnail_brief || 'N/A';
+            
+            // Sources
+            const sourcesDiv = document.getElementById("review-sources");
+            sourcesDiv.innerHTML = "";
+            (args.sources_cited || []).forEach(src => {
+                const a = document.createElement("a");
+                a.href = src;
+                a.target = "_blank";
+                a.className = "source-a";
+                a.innerText = src;
+                sourcesDiv.appendChild(a);
+            });
+            
+            panel.style.display = "flex";
         }
 
         function submitReviewAction(action) {
@@ -761,10 +991,6 @@ HTML_TEMPLATE = """
             
             const notes = document.getElementById("revision-notes").value;
             const target = document.getElementById("revision-target").value;
-            
-            const btn = document.querySelector("#review-panel button");
-            const originalText = btn.innerText;
-            btn.innerText = "Submitting...";
             
             fetch(`/api/session/${currentSessionId}/action`, {
                 method: 'POST',
@@ -775,37 +1001,42 @@ HTML_TEMPLATE = """
             .then(data => {
                 if (data.success) {
                     document.getElementById("review-panel").style.display = "none";
+                    document.getElementById("state-empty").style.display = "flex";
                     document.getElementById("revision-notes").value = "";
                     if (action === "REVISE") {
                         document.getElementById("pipeline-status").innerText = "ROUTING REVISION...";
+                        document.getElementById("state-empty").innerText = "ROUTING REVISION BACK...";
                     }
                 } else {
                     alert("Action failed: " + data.error);
                 }
             })
-            .catch(err => alert("Failed to connect to API."))
-            .finally(() => btn.innerText = originalText);
+            .catch(err => alert("Failed to connect to API."));
+        }
+
+        function closeModal() {
+            document.getElementById("detail-modal").style.display = "none";
         }
 
         function viewNodeOutput(nodeName) {
             if (!currentSessionData) return;
-            const nodeEl = document.getElementById(`node-${nodeName.toLowerCase().replace('agent','')}`);
-            if (!nodeEl || !nodeEl.classList.contains('clickable')) return;
             
             const titleEl = document.getElementById("modal-title");
             const bodyEl = document.getElementById("modal-body");
             
+            bodyEl.className = "modal-body";
+            
             if (nodeName === 'OrchestratorAgent') {
-                titleEl.innerText = "Orchestrator Session Config";
+                titleEl.innerText = "ORCHESTRATOR CONFIGURATION";
                 bodyEl.innerHTML = `
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <div><strong>Session ID:</strong> ${currentSessionId}</div>
-                        <div><strong>Topic:</strong> ${currentSessionData.topic}</div>
-                        <div><strong>Status:</strong> ${currentSessionData.status.toUpperCase()}</div>
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div><strong>SESSION ID:</strong> ${currentSessionId}</div>
+                        <div><strong>TOPIC IDEA:</strong> ${currentSessionData.topic}</div>
+                        <div><strong>CURRENT STATUS:</strong> ${currentSessionData.status.toUpperCase()}</div>
                     </div>
                 `;
             } else if (nodeName === 'ResearchAgent') {
-                titleEl.innerText = "Research Agent - Gathered Sources & Brief";
+                titleEl.innerText = "RESEARCH AGENT BRIEF & SOURCES";
                 const brief = currentSessionData.research_brief || {};
                 
                 let sourcesHtml = "";
@@ -815,77 +1046,78 @@ HTML_TEMPLATE = """
                 } else {
                     sources.forEach(src => {
                         sourcesHtml += `
-                            <div class="source-item">
-                                <div style="font-weight: 600; margin-bottom: 0.25rem;">${src.title || 'Source'}</div>
-                                <a href="${src.url}" target="_blank" class="source-link">${src.url}</a>
-                                <div style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">${src.snippet || ''}</div>
+                            <div style="border: 1px solid var(--border); padding: 1rem; margin-bottom: 1rem; background-color: #0f0f0f;">
+                                <div style="font-weight: 700; margin-bottom: 0.5rem; text-transform: uppercase;">${src.title || 'Source'}</div>
+                                <a href="${src.url}" target="_blank" class="source-a">${src.url}</a>
+                                <div style="color: var(--dim); font-size: 0.8rem; margin-top: 0.5rem; font-family: sans-serif;">${src.snippet || ''}</div>
                             </div>
                         `;
                     });
                 }
                 
                 bodyEl.innerHTML = `
-                    <div style="margin-bottom: 1.5rem;">
-                        <h4 style="margin-top: 0; color: var(--accent-color);">Research Summary</h4>
-                        <div class="pre-wrap">${brief.summary || 'No summary compiled.'}</div>
+                    <div style="margin-bottom: 2rem;">
+                        <span class="label">Research Summary</span>
+                        <div style="line-height: 1.6; font-family: sans-serif; font-size: 0.95rem;">${brief.summary || 'No summary compiled.'}</div>
                     </div>
                     <div>
-                        <h4 style="color: var(--accent-color);">Verified Web Sources</h4>
+                        <span class="label">Verified Web Sources</span>
                         ${sourcesHtml}
                     </div>
                 `;
             } else if (nodeName === 'ScriptAgent') {
-                titleEl.innerText = "Script Agent - Narration Script";
+                titleEl.innerText = "SCRIPT AGENT NARRATION DRAFT";
                 const scriptPkg = currentSessionData.script_package || {};
                 const markdownContent = scriptPkg.content || "*No script draft created yet.*";
                 
+                bodyEl.className = "modal-body markdown-output";
                 bodyEl.innerHTML = `
-                    <div style="display: flex; gap: 2rem; margin-bottom: 1.5rem; background: #0d1117; padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <div><strong>Word Count:</strong> ${scriptPkg.word_count || 'N/A'} words</div>
-                        <div><strong>Est. Duration:</strong> ${scriptPkg.estimated_duration || 'N/A'} seconds</div>
+                    <div style="display: flex; gap: 2rem; margin-bottom: 2rem; border: 1px solid var(--border); padding: 1rem; background-color: #0f0f0f;">
+                        <div><strong>WORD COUNT:</strong> ${scriptPkg.word_count || 'N/A'}</div>
+                        <div><strong>EST. DURATION:</strong> ${scriptPkg.estimated_duration || 'N/A'}</div>
                     </div>
                     <div>
-                        <h4 style="color: var(--accent-color); margin-top: 0;"> Narration Script Draft</h4>
-                        <div style="background: #07090e; padding: 1.5rem; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <span class="label">Draft Script Markdown</span>
+                        <div style="line-height: 1.6; font-family: sans-serif; font-size: 0.95rem;">
                             ${marked.parse(markdownContent)}
                         </div>
                     </div>
                 `;
             } else if (nodeName === 'SEOAgent') {
-                titleEl.innerText = "SEO Agent - Metadata Package";
+                titleEl.innerText = "SEO AGENT METADATA PACKAGE";
                 const seoPkg = currentSessionData.seo_package || {};
                 
                 let titlesList = "";
                 (seoPkg.titles || []).forEach((t, i) => {
-                    titlesList += `<li>${t}</li>`;
+                    titlesList += `<li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-family: sans-serif;">${t}</li>`;
                 });
                 
                 bodyEl.innerHTML = `
-                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div style="display: flex; flex-direction: column; gap: 2rem;">
                         <div>
-                            <h4 style="margin-top: 0; color: var(--accent-color);">Suggested Video Titles</h4>
-                            <ul style="padding-left: 1.25rem; line-height: 1.8;">${titlesList || '<li>No titles generated.</li>'}</ul>
+                            <span class="label">Suggested Video Titles</span>
+                            <ol style="padding-left: 1.5rem;">${titlesList || '<li>No titles generated.</li>'}</ol>
                         </div>
                         <div>
-                            <h4 style="margin-top: 0; color: var(--accent-color);">Tags</h4>
+                            <span class="label">Video Tags</span>
                             <div>${(seoPkg.tags || []).join(', ') || 'No tags generated.'}</div>
                         </div>
                         <div>
-                            <h4 style="margin-top: 0; color: var(--accent-color);">Thumbnail Brief</h4>
-                            <div class="pre-wrap">${seoPkg.thumbnail_brief || 'No thumbnail description generated.'}</div>
+                            <span class="label">Thumbnail Design Brief</span>
+                            <div style="font-family: sans-serif; line-height: 1.6;">${seoPkg.thumbnail_brief || 'No thumbnail description generated.'}</div>
                         </div>
                         <div>
-                            <h4 style="margin-top: 0; color: var(--accent-color);">Video Description</h4>
-                            <div class="pre-wrap" style="background: #0d1117; padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); font-size: 0.95rem;">${seoPkg.description || 'No description generated.'}</div>
+                            <span class="label">Video Description</span>
+                            <div style="background-color: #0f0f0f; border: 1px solid var(--border); padding: 1.5rem; font-family: sans-serif; font-size: 0.9rem; line-height: 1.6;">${seoPkg.description || 'No description generated.'}</div>
                         </div>
                     </div>
                 `;
             } else if (nodeName === 'ReviewAgent') {
-                titleEl.innerText = "Review Agent - Verification Logs";
+                titleEl.innerText = "REVIEW AGENT AUDIT LOGS";
                 bodyEl.innerHTML = `
-                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <div><strong>Approval Status:</strong> ${currentSessionData.status.toUpperCase()}</div>
-                        \${currentSessionData.saved_directory ? \`<div><strong>Output Directory:</strong> \${currentSessionData.saved_directory}</div>\` : ''}
+                    <div style="display: flex; flex-direction: column; gap: 1rem;">
+                        <div><strong>APPROVAL STATUS:</strong> ${currentSessionData.status.toUpperCase()}</div>
+                        ${currentSessionData.saved_directory ? `<div><strong>SAVED DIRECTORY:</strong> ${currentSessionData.saved_directory}</div>` : ''}
                     </div>
                 `;
             }
@@ -894,15 +1126,14 @@ HTML_TEMPLATE = """
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            window.closeModal = closeModal;
-            
             // Check if there is an active session in progress on page load
             const savedSessionId = localStorage.getItem("contentos_session_id");
             if (savedSessionId) {
                 currentSessionId = savedSessionId;
                 document.getElementById("submit-btn").disabled = true;
-                document.getElementById("submit-btn").innerText = "Generating...";
-                document.getElementById("status-panel").style.display = "block";
+                document.getElementById("submit-btn").innerText = "GENERATING...";
+                document.getElementById("status-panel").style.display = "flex";
+                document.getElementById("state-empty").innerText = "PIPELINE RUNNING...";
                 
                 // Trigger immediate poll and resume interval
                 pollSessionStatus();
