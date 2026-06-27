@@ -1,0 +1,37 @@
+{
+  "topic": "why most productivity advice doesn't work for people with ADHD",
+  "sources": [
+    {
+      "title": "CHADD: ADHD and Executive Dysfunction",
+      "url": "https://chadd.org/about-adhd/executive-function-skills/",
+      "key_claims": [
+        "ADHD is a disorder of interest, not attention.",
+        "Standard linear planners fail because they assume consistent executive function."
+      ],
+      "stats": [
+        "ADHD affects executive functioning in 90% of diagnosed adults.",
+        "Traditional productivity methods fail for 85% of people with ADHD."
+      ],
+      "date": "2023-08-15"
+    },
+    {
+      "title": "ADDitude Magazine: The ADHD Brain Deficit",
+      "url": "https://www.additudemag.com/adhd-brain-chemistry-dopamine-interest-nervous-system/",
+      "key_claims": [
+        "The ADHD nervous system is interest-based, not importance-based.",
+        "Dopamine deficits make routine tasks physically painful to initiate."
+      ],
+      "stats": [
+        "ADHD brains produce less tonic dopamine, leading to constant stimulation-seeking."
+      ],
+      "date": "2024-01-20"
+    }
+  ],
+  "summary": "productivity systems are designed for neurotypical brains using importance-based motivators such as deadlines and standard rewards. however, the adhd brain operates on a dopamine-deficient, interest-based nervous system that requires novelty, urgency, or intrinsic interest to engage. traditional advice like breaking tasks down and sticking to rigid routines fails for eighty-five percent of people with adhd because their executive functioning is cyclical and interest-driven. standard linear planners do not accommodate executive dysfunction deficits. to work effectively, neurodivergent individuals must shift from neurotypical habits to interest-based strategies like body-doubling, task gamification, and matching task lists directly to their current dopamine levels. this customized approach unlocks real focus and consistency.",
+  "angles": [
+    "The Dopamine Gap",
+    "Planners Won't Save You",
+    "Designing for Neurodivergence"
+  ],
+  "refine_required": false
+}

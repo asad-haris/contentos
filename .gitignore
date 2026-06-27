@@ -1,0 +1,19 @@
+# ContentOS Git Ignore Rules
+
+# Credentials & secrets
+.env
+
+# Python Caches & builds
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.venv/
+venv/
+
+# Agents & CLI local caches
+.agents/cache/
+
+# Project Generated Outputs
+output/

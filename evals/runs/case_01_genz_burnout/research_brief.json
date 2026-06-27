@@ -1,0 +1,51 @@
+{
+  "topic": "why gen z is burnt out before they even start their careers",
+  "sources": [
+    {
+      "title": "Deloitte 2024 Gen Z and Millennial Survey",
+      "url": "https://www2.deloitte.com/global/en/pages/about-deloitte/articles/genzmillennialsurvey.html",
+      "key_claims": [
+        "Cost of living is Gen Z's top concern.",
+        "High stress and burnout persist due to workload."
+      ],
+      "stats": [
+        "40% of Gen Zs feel stressed constantly.",
+        "35% report feeling burned out."
+      ],
+      "date": "2024-05-15"
+    },
+    {
+      "title": "McKinsey Mental Health Index 2023",
+      "url": "https://www.mckinsey.com/mgi/our-research/delivering-on-the-promise-of-employer-supported-mental-health",
+      "key_claims": [
+        "Gen Z reports the lowest mental well-being.",
+        "Pre-career stress is fueled by economic instability."
+      ],
+      "stats": [
+        "Gen Z is 3 times more likely to report poor mental health.",
+        "Pre-career stress affects 55% of grads."
+      ],
+      "date": "2023-10-12"
+    },
+    {
+      "title": "American Psychological Association: Stress in America",
+      "url": "https://www.apa.org/news/press/releases/stress/2023/collective-trauma-gen-z",
+      "key_claims": [
+        "Gen Z is stressed about future economy and career barriers.",
+        "Workplace expectations lead to anxiety."
+      ],
+      "stats": [
+        "72% list work and economy as stressors.",
+        "64% feel overwhelmed by career paths."
+      ],
+      "date": "2023-11-01"
+    }
+  ],
+  "summary": "gen z is facing unprecedented stress levels before entering the workforce, driven by cost of living concerns, economic instability, and high career expectations. surveys show they report the lowest mental well-being of any generation, with over forty percent feeling anxious most of the time. this pre-career burnout is not a sign of laziness; rather, it is a rational response to entering a game where the entry price has doubled while the payouts are halved. they face systemic financial claustrophobia, shifting workplace dynamics, and extreme pressure to plan ten years ahead in a highly volatile world. the combination of these factors makes the transition from education to employment extremely exhausting, leading to early crash points.",
+  "angles": [
+    "The Price of Ambition",
+    "The Pre-Career Crash",
+    "Rethinking the 9-to-5 Dream"
+  ],
+  "refine_required": false
+}

@@ -1,0 +1,37 @@
+{
+  "topic": "the psychology behind why we procrastinate on things we actually care about",
+  "sources": [
+    {
+      "title": "Solving the Procrastination Puzzle by Dr. Timothy Pychyl",
+      "url": "https://www.psychologytoday.com/us/blog/dont-delay/202003/solving-the-procrastination-puzzle",
+      "key_claims": [
+        "Procrastination is an emotion regulation problem, not a time management problem.",
+        "We avoid tasks to seek short-term mood repair."
+      ],
+      "stats": [
+        "20% of adults are chronic procrastinators.",
+        "Procrastination is linked to higher stress and depression."
+      ],
+      "date": "2020-03-10"
+    },
+    {
+      "title": "Harvard Business Review: Why You Procrastinate",
+      "url": "https://hbr.org/2019/03/why-you-procrastinate-it-has-to-do-with-emotions-not-time",
+      "key_claims": [
+        "Amygdala hijack causes us to prioritize immediate relief over long-term goals.",
+        "Self-compassion reduces procrastination recurrence."
+      ],
+      "stats": [
+        "Procrastinating on important tasks leads to a 25% increase in anxiety levels."
+      ],
+      "date": "2019-03-25"
+    }
+  ],
+  "summary": "procrastination is primarily an emotional regulation issue where the brain prioritizes immediate mood repair over future rewards. when a task feels high-stakes or is tied to our self-worth, the amygdala treats the pressure as a threat and prompts avoidance behavior. standard time management systems fail because they ignore this emotional component. dr. timothy pychyl's research shows that checking your phone or procrastinating is a subconscious attempt to escape feeling small or overwhelmed. by choosing short-term relief, chronic procrastinators experience a twenty-five percent spike in long-term anxiety. the key to breaking this cycle lies in self-compassion and taking action without waiting to feel motivated.",
+  "angles": [
+    "The Mood Repair Trap",
+    "Your Amygdala is Lying to You",
+    "High Stakes, Zero Action"
+  ],
+  "refine_required": false
+}

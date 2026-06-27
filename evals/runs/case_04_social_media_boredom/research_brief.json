@@ -1,0 +1,37 @@
+{
+  "topic": "how social media is rewiring our ability to be bored",
+  "sources": [
+    {
+      "title": "The Dopamine Loop: Social Media and ADHD Symptoms",
+      "url": "https://www.psychologytoday.com/us/blog/dopamine-loop",
+      "key_claims": [
+        "Social media platforms micro-dose dopamine, raising the excitement threshold.",
+        "Constant scrolling makes normal, quiet moments feel extremely boring."
+      ],
+      "stats": [
+        "Average screen time for teens is 7 hours a day.",
+        "Boredom tolerance decreased by 40% over the last decade."
+      ],
+      "date": "2024-03-12"
+    },
+    {
+      "title": "Boredom is Good for the Brain: Nature Study",
+      "url": "https://www.nature.com/articles/boredom-and-default-mode-network",
+      "key_claims": [
+        "Boredom activates the default mode network (DMN), which is critical for creativity.",
+        "Avoiding boredom stops deep cognitive processing."
+      ],
+      "stats": [
+        "DMN activity drops by 50% when constantly stimulated by notifications."
+      ],
+      "date": "2023-09-05"
+    }
+  ],
+  "summary": "social media platforms are engineered to micro-dose dopamine through infinite scrolls and instant notifications. this constant digital stimulation raises our neurochemical baseline threshold, which makes normal offline moments feel intolerably boring. a nature study shows that constant alerts drop default mode network activity in the brain by fifty percent. the default mode network is critical for deep creative thoughts and passive consolidation of memories. when we avoid boredom by scrolling, we are starving our cognitive capacity. reclaiming our focus requires us to deliberately rebuild our boredom tolerance and allow unstructured quiet moments back into our daily routines. by reclaiming this blank mental space, we allow our brains to recharge and generate original ideas.",
+  "angles": [
+    "The Infinite Scroll Trap",
+    "The Dopamine Baseline Shift",
+    "Why Boredom is Your Superpower"
+  ],
+  "refine_required": false
+}

@@ -1,0 +1,177 @@
+[
+  {
+    "eval_id": "case_01_genz_burnout",
+    "input_topic": "why gen z is burnt out before they even start their careers",
+    "expected_outputs": {
+      "research": {
+        "min_sources": 3,
+        "required_fields": ["topic", "sources", "summary", "angles", "refine_required"]
+      },
+      "script": {
+        "min_word_count": 150,
+        "max_word_count": 250,
+        "hook_banned_phrases": [
+          "in today's video",
+          "welcome back",
+          "make sure to subscribe",
+          "let's dive in",
+          "hello",
+          "hey guys"
+        ],
+        "must_cite_sources": true,
+        "min_sources_cited": 2
+      },
+      "seo": {
+        "title_count": 3,
+        "max_title_length": 60,
+        "min_tags": 5,
+        "required_title_variety": ["number", "question", "statement"]
+      }
+    },
+    "quality_rubric": {
+      "hook_quality": "hook must immediately address pre-career exhaust/burnout without introductions, favoring direct lowercase delivery",
+      "angle_relevance": "focus on the financial mismatch, cost of living pressure, and low generation mental health index (Deloitte/McKinsey statistics)",
+      "seo_notes": "target keywords like gen z, pre-career burnout, entry-level fatigue. titles must remain snappy, under 60 characters, with one containing a number and another a question"
+    }
+  },
+  {
+    "eval_id": "case_02_procrastination",
+    "input_topic": "the psychology behind why we procrastinate on things we actually care about",
+    "expected_outputs": {
+      "research": {
+        "min_sources": 2,
+        "required_fields": ["topic", "sources", "summary", "angles", "refine_required"]
+      },
+      "script": {
+        "min_word_count": 140,
+        "max_word_count": 220,
+        "hook_banned_phrases": [
+          "in today's video",
+          "welcome back",
+          "make sure to subscribe",
+          "let's dive in",
+          "hello",
+          "hey guys"
+        ],
+        "must_cite_sources": true,
+        "min_sources_cited": 2
+      },
+      "seo": {
+        "title_count": 3,
+        "max_title_length": 60,
+        "min_tags": 5,
+        "required_title_variety": ["number", "question", "statement"]
+      }
+    },
+    "quality_rubric": {
+      "hook_quality": "hook must challenge standard time management advice, immediately stating procrastination is emotional avoidance",
+      "angle_relevance": "explain the neuroscience aspect (amygdala threat hijack) and short-term mood repair cycle over lazy self-sabotage",
+      "seo_notes": "titles should play on psychological curiosity, targeting terms like procrastination habits, mental resistance, emotion regulation"
+    }
+  },
+  {
+    "eval_id": "case_03_adhd_productivity",
+    "input_topic": "why most productivity advice doesn't work for people with ADHD",
+    "expected_outputs": {
+      "research": {
+        "min_sources": 2,
+        "required_fields": ["topic", "sources", "summary", "angles", "refine_required"]
+      },
+      "script": {
+        "min_word_count": 150,
+        "max_word_count": 230,
+        "hook_banned_phrases": [
+          "in today's video",
+          "welcome back",
+          "make sure to subscribe",
+          "let's dive in",
+          "hello",
+          "hey guys"
+        ],
+        "must_cite_sources": true,
+        "min_sources_cited": 2
+      },
+      "seo": {
+        "title_count": 3,
+        "max_title_length": 60,
+        "min_tags": 5,
+        "required_title_variety": ["number", "question", "statement"]
+      }
+    },
+    "quality_rubric": {
+      "hook_quality": "hook must mock traditional planners or rigid time-blocking systems, addressing ADHD executive dysfunction directly",
+      "angle_relevance": "contrast neurotypical importance-based motivation with the ADHD interest-based nervous system and dopamine deficiency",
+      "seo_notes": "target keyword search terms such as adhd hacks, neurodivergent productivity, executive function deficit. maintain strict title length and validation limits"
+    }
+  },
+  {
+    "eval_id": "case_04_social_media_boredom",
+    "input_topic": "how social media is rewiring our ability to be bored",
+    "expected_outputs": {
+      "research": {
+        "min_sources": 2,
+        "required_fields": ["topic", "sources", "summary", "angles", "refine_required"]
+      },
+      "script": {
+        "min_word_count": 140,
+        "max_word_count": 220,
+        "hook_banned_phrases": [
+          "in today's video",
+          "welcome back",
+          "make sure to subscribe",
+          "let's dive in",
+          "hello",
+          "hey guys"
+        ],
+        "must_cite_sources": true,
+        "min_sources_cited": 2
+      },
+      "seo": {
+        "title_count": 3,
+        "max_title_length": 60,
+        "min_tags": 5,
+        "required_title_variety": ["number", "question", "statement"]
+      }
+    },
+    "quality_rubric": {
+      "hook_quality": "hook must address micro-dosing dopamine via constant scrolling and the lost skill of unstructured thoughts",
+      "angle_relevance": "explain how constant digital stimulation shifts baseline dopamine thresholds, reducing natural tolerance for passive silence",
+      "seo_notes": "focus on search tags like phone addiction, dopamine detox, focus training. ensure titles provoke reflection on digital dependencies"
+    }
+  },
+  {
+    "eval_id": "case_05_millennial_therapy",
+    "input_topic": "why therapy has become a personality trait for millennials",
+    "expected_outputs": {
+      "research": {
+        "min_sources": 2,
+        "required_fields": ["topic", "sources", "summary", "angles", "refine_required"]
+      },
+      "script": {
+        "min_word_count": 140,
+        "max_word_count": 220,
+        "hook_banned_phrases": [
+          "in today's video",
+          "welcome back",
+          "make sure to subscribe",
+          "let's dive in",
+          "hello",
+          "hey guys"
+        ],
+        "must_cite_sources": true,
+        "min_sources_cited": 2
+      },
+      "seo": {
+        "title_count": 3,
+        "max_title_length": 60,
+        "min_tags": 5,
+        "required_title_variety": ["number", "question", "statement"]
+      }
+    },
+    "quality_rubric": {
+      "hook_quality": "hook must call out the misuse of therapy speak (gaslighting, narcissism, trauma) in casual dating and friendships",
+      "angle_relevance": "discuss the shift from therapy as a healing mechanism to therapy terminology as social identity and shields against criticism",
+      "seo_notes": "target millennial habits, therapy speak, clinical buzzwords, self-care culture. maintain the sharp, blunt older sibling narrative voice"
+    }
+  }
+]

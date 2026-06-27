@@ -1,0 +1,36 @@
+# ContentOS Evaluation System Configuration
+
+metadata:
+  name: ContentOS Evaluation System Config
+  version: "1.0.0"
+
+# Scoring Weights for Each Agent Node (Must sum to 100%)
+weights:
+  research: 0.25  # Fact gathering, summary completion, source validation
+  script: 0.40    # Narration delivery, lowercase adherence, word count constraints
+  seo: 0.20       # Target counts, title variety, description length limits
+  hitl: 0.15      # Interaction callback pause/resume validation, audit log persistence
+
+# General Evals Settings
+thresholds:
+  pass_threshold: 0.70  # Combined score must be at least 70% to pass the evaluation run
+
+# Failure Conditions that trigger automatic FAIL regardless of total score
+auto_fail_conditions:
+  research:
+    min_sources_limit: 2        # Auto-fail if ResearchAgent saves fewer than 2 validated sources
+    missing_required_fields: true # Auto-fail if research brief model schema fails structural validation
+  
+  script:
+    contains_banned_phrases: true # Auto-fail if script hook/narration contains any banned phrases
+    missing_citations: true       # Auto-fail if sources are mentioned but no citations/links are appended
+    word_count_out_of_bounds: true # Auto-fail if script word count is outside specified [min, max] limits
+    non_lowercase_narrative: false  # Do not auto-fail on casing mistakes, but penalize in the score
+
+  seo:
+    incorrect_title_count: true   # Auto-fail if generated titles are not exactly 3 options
+    title_length_exceeded: true   # Auto-fail if any single title option exceeds 60 characters
+    insufficient_tags: true       # Auto-fail if tags list count is under 5
+
+  hitl:
+    missing_approval_log: true    # Auto-fail if approval log file fails to generate upon approval state

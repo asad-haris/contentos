@@ -1,0 +1,81 @@
+{
+  "run_timestamp": "2026-06-26T19:20:53.985928",
+  "total_score": 100.0,
+  "pass_fail": "PASS",
+  "per_case_scores": [
+    {
+      "eval_id": "case_01_genz_burnout",
+      "input_topic": "why gen z is burnt out before they even start their careers",
+      "score_breakdown": {
+        "research": 25,
+        "script": 40,
+        "seo": 20,
+        "hitl": 15
+      },
+      "total_score": 100,
+      "elapsed_seconds": 0.37,
+      "status": "PASS",
+      "failures": []
+    },
+    {
+      "eval_id": "case_02_procrastination",
+      "input_topic": "the psychology behind why we procrastinate on things we actually care about",
+      "score_breakdown": {
+        "research": 25,
+        "script": 40,
+        "seo": 20,
+        "hitl": 15
+      },
+      "total_score": 100,
+      "elapsed_seconds": 0.35,
+      "status": "PASS",
+      "failures": []
+    },
+    {
+      "eval_id": "case_03_adhd_productivity",
+      "input_topic": "why most productivity advice doesn't work for people with ADHD",
+      "score_breakdown": {
+        "research": 25,
+        "script": 40,
+        "seo": 20,
+        "hitl": 15
+      },
+      "total_score": 100,
+      "elapsed_seconds": 1.73,
+      "status": "PASS",
+      "failures": []
+    },
+    {
+      "eval_id": "case_04_social_media_boredom",
+      "input_topic": "how social media is rewiring our ability to be bored",
+      "score_breakdown": {
+        "research": 25,
+        "script": 40,
+        "seo": 20,
+        "hitl": 15
+      },
+      "total_score": 100,
+      "elapsed_seconds": 0.47,
+      "status": "PASS",
+      "failures": []
+    },
+    {
+      "eval_id": "case_05_millennial_therapy",
+      "input_topic": "why therapy has become a personality trait for millennials",
+      "score_breakdown": {
+        "research": 25,
+        "script": 40,
+        "seo": 20,
+        "hitl": 15
+      },
+      "total_score": 100,
+      "elapsed_seconds": 0.43,
+      "status": "PASS",
+      "failures": []
+    }
+  ],
+  "failures": [],
+  "recommendations": [
+    "No actions needed. All tests passed."
+  ]
+}

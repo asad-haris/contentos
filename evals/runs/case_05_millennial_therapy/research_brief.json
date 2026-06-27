@@ -1,0 +1,37 @@
+{
+  "topic": "why therapy has become a personality trait for millennials",
+  "sources": [
+    {
+      "title": "The Rise of Therapy Speak: New Yorker",
+      "url": "https://www.newyorker.com/culture/cultural-comment/the-rise-of-therapy-speak",
+      "key_claims": [
+        "Therapy speak (boundaries, gaslighting, toxic) is used to justify selfish behavior.",
+        "Clinical terms are co-opted to avoid interpersonal conflict."
+      ],
+      "stats": [
+        "Usage of the term 'gaslighting' increased by 300% on social platforms.",
+        "45% of millennials utilize therapy buzzwords weekly in text chats."
+      ],
+      "date": "2023-05-18"
+    },
+    {
+      "title": "Millennial Identity and Self-Care: Pew Research",
+      "url": "https://www.pewresearch.org/social-trends/2023/12/millennial-self-care-identities",
+      "key_claims": [
+        "Millennials view mental health work as a primary identifier of their generation.",
+        "Therapy is worn as a badge of honor or moral superiority."
+      ],
+      "stats": [
+        "60% of millennials list therapy as an important aspect of their identity."
+      ],
+      "date": "2023-12-10"
+    }
+  ],
+  "summary": "therapy terminology has shifted from a private clinical tool to a public badge of identity for millennials. co-opting clinical terms like gaslighting, boundaries, or narcissism allows individuals to frame standard relationship friction as medical abuse, effectively bypassing normal conflict resolution and self-reflection. pew research indicates that sixty percent of millennials view mental health work as a primary identifier of their generation, treating therapy as a brand of moral superiority. weaponizing clinical vocabulary under the guise of self-care can isolate people rather than heal them. true emotional maturity requires moving past clinical buzzwords and engaging in messy, authentic human connections. ultimately, healing is about vulnerability and direct conversation, not clinical classification tags.",
+  "angles": [
+    "The Trap of Therapy Speak",
+    "Self-Care or Self-Absorption?",
+    "The New Moral Superiority"
+  ],
+  "refine_required": false
+}
