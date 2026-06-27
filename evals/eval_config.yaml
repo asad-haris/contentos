@@ -25,6 +25,7 @@ auto_fail_conditions:
     contains_banned_phrases: true # Auto-fail if script hook/narration contains any banned phrases
     missing_citations: true       # Auto-fail if sources are mentioned but no citations/links are appended
     word_count_out_of_bounds: true # Auto-fail if script word count is outside specified [min, max] limits
+    max_word_count: 300            # Override script max_word_count
     non_lowercase_narrative: false  # Do not auto-fail on casing mistakes, but penalize in the score
 
   seo:

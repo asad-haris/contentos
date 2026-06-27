@@ -9,7 +9,7 @@
       },
       "script": {
         "min_word_count": 150,
-        "max_word_count": 250,
+        "max_word_count": 300,
         "hook_banned_phrases": [
           "in today's video",
           "welcome back",

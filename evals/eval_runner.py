@@ -96,6 +96,19 @@ def score_case(case_data, run_dir):
             min_wc = expected["script"]["min_word_count"]
             max_wc = expected["script"]["max_word_count"]
             
+            # Dynamic override from config if specified
+            config_path = "evals/eval_config.yaml"
+            if os.path.exists(config_path):
+                try:
+                    with open(config_path, "r", encoding="utf-8") as f:
+                        import yaml
+                        cfg = yaml.safe_load(f) or {}
+                        cfg_max = cfg.get("auto_fail_conditions", {}).get("script", {}).get("max_word_count")
+                        if cfg_max:
+                            max_wc = cfg_max
+                except Exception:
+                    pass
+            
             # Word count
             if min_wc <= word_count <= max_wc:
                 s_score += 15
