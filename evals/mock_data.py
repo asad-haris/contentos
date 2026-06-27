@@ -325,17 +325,75 @@ async def mock_generate_content_async(self, llm_request, stream=False):
                 matched_key = k
                 break
                 
-    if not matched_key:
-        matched_key = "why gen z is burnt out before they even start their careers"
+    if matched_key:
+        topic_data = MOCK_EVALS_DATA[matched_key]
+        display_topic = matched_key
+        slug = topic_data.get("slug", "mock_case")
+        mock_brief = topic_data["research"]
+        mock_script = topic_data["script"]
+        mock_seo = topic_data["seo"]
+    else:
+        display_topic = topic_key or "why gen z is burnt out before they even start their careers"
+        import re
+        slug = re.sub(r'[^a-z0-9]+', '_', display_topic.lower()).strip('_')
+        if not slug:
+            slug = "custom_topic"
+            
+        topic_data = {"slug": slug}
+            
+        mock_brief = {
+            "topic": display_topic,
+            "sources": [
+                {
+                    "title": f"Study on {display_topic}",
+                    "url": f"https://example.com/{slug}-study",
+                    "key_claims": [f"Key claim regarding {display_topic}."],
+                    "stats": [f"Stat representing {display_topic}."],
+                    "date": "2026-06-27"
+                },
+                {
+                    "title": f"Statistical report on {display_topic}",
+                    "url": f"https://example.org/{slug}-report",
+                    "key_claims": [f"Detailed analysis claim for {display_topic}."],
+                    "stats": [f"Data findings on {display_topic}."],
+                    "date": "2026-05-15"
+                }
+            ],
+            "summary": f"this brief compiles critical research and statistics regarding {display_topic}. key findings suggest significant impacts on the target group, necessitating direct attention.",
+            "angles": [f"The truth about {display_topic}", f"Behind the scenes of {display_topic}", f"Future perspectives of {display_topic}"],
+            "refine_required": False
+        }
         
-    topic_data = MOCK_EVALS_DATA[matched_key]
-    
-    # Use topic_key as prompt for outputs if relevant
-    display_topic = topic_key or matched_key
-
-    mock_brief = topic_data["research"]
-    mock_script = topic_data["script"]
-    mock_seo = topic_data["seo"]
+        mock_script = {
+            "script": (
+                f"# Hook\n"
+                f"we need to talk about {display_topic.lower()}. it is not just a trend; it is shaping your entire reality.\n\n"
+                f"# Section 1: The Core Issue\n"
+                f"point one. research shows {display_topic.lower()} is a systemic challenge, according to https://example.com/{slug}-study. the numbers do not lie.\n\n"
+                f"# Section 2: Modern Realities\n"
+                f"point two. the data from https://example.org/{slug}-report reveals how deep this issue runs. the old frameworks are failing us.\n\n"
+                f"# Section 3: Reclaiming Control\n"
+                f"point three. we must shift from passive observation to active solutions. waiting for standard channels to fix this is useless.\n\n"
+                f"# CTA\n"
+                f"how are you dealing with {display_topic.lower()}? drop your comments below and subscribe for more blunt truth."
+            ),
+            "word_count": 135,
+            "estimated_duration": "60 seconds",
+            "sources_cited": [f"https://example.com/{slug}-study", f"https://example.org/{slug}-report"],
+            "hook": f"we need to talk about {display_topic.lower()}. it is not just a trend; it is shaping your entire reality."
+        }
+        
+        mock_seo = {
+            "titles": [
+                f"why {display_topic.lower()} is completely broken",
+                f"the real truth behind {display_topic.lower()}",
+                f"what they will not tell you about {display_topic.lower()}"
+            ],
+            "description": f"Breaking down the root causes and statistics of {display_topic}, highlighting the key findings and realistic solutions.",
+            "tags": [slug.replace('_', ' '), "analysis", "insights", "trends"],
+            "thumbnail_brief": f"A stark, high-contrast visual representing the core themes of {display_topic}.",
+            "chapter_markers": ["0:00 - The Hook", "0:25 - The Core Problem", "1:00 - The Solution", "1:35 - CTA"]
+        }
 
     system_instr = ""
     if hasattr(llm_request, "config") and llm_request.config and llm_request.config.system_instruction:
