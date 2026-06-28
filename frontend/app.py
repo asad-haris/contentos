@@ -843,12 +843,32 @@ HTML_TEMPLATE = """
             if (!currentSessionId) return;
             
             fetch(`/api/session/${currentSessionId}`)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error("Session invalid or not found");
+                }
+                return res.json();
+            })
             .then(data => {
                 currentSessionData = data;
                 updatePipelineUI(data);
             })
-            .catch(err => console.error("Error polling session: ", err));
+            .catch(err => {
+                console.error("Error polling session: ", err);
+                // Clear stuck state if session doesn't exist or is invalid
+                if (pollInterval) {
+                    clearInterval(pollInterval);
+                    pollInterval = null;
+                }
+                localStorage.removeItem("contentos_session_id");
+                currentSessionId = null;
+                resetLaunchButton();
+                document.getElementById("pipeline-status").innerText = "IDLE";
+                document.getElementById("pipeline-status").style.color = "var(--dim)";
+                document.getElementById("state-empty").style.display = "flex";
+                document.getElementById("state-empty").innerText = "AWAITING INPUT";
+                document.getElementById("status-panel").style.display = "none";
+            });
         }
 
         function updatePipelineUI(session) {
@@ -997,7 +1017,12 @@ HTML_TEMPLATE = """
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ action: action, notes: notes, target: target })
             })
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error("Action failed. Session might have expired.");
+                }
+                return res.json();
+            })
             .then(data => {
                 if (data.success) {
                     document.getElementById("review-panel").style.display = "none";
@@ -1011,7 +1036,7 @@ HTML_TEMPLATE = """
                     alert("Action failed: " + data.error);
                 }
             })
-            .catch(err => alert("Failed to connect to API."));
+            .catch(err => alert("Failed to connect to API: " + err.message));
         }
 
         function closeModal() {
