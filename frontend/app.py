@@ -845,7 +845,9 @@ HTML_TEMPLATE = """
             fetch(`/api/session/${currentSessionId}`)
             .then(res => {
                 if (!res.ok) {
-                    throw new Error("Session invalid or not found");
+                    const err = new Error("Session invalid or not found");
+                    err.status = res.status;
+                    throw err;
                 }
                 return res.json();
             })
@@ -855,19 +857,21 @@ HTML_TEMPLATE = """
             })
             .catch(err => {
                 console.error("Error polling session: ", err);
-                // Clear stuck state if session doesn't exist or is invalid
-                if (pollInterval) {
-                    clearInterval(pollInterval);
-                    pollInterval = null;
+                // Clear stuck state ONLY if session explicitly doesn't exist on server (404)
+                if (err.status === 404) {
+                    if (pollInterval) {
+                        clearInterval(pollInterval);
+                        pollInterval = null;
+                    }
+                    localStorage.removeItem("contentos_session_id");
+                    currentSessionId = null;
+                    resetLaunchButton();
+                    document.getElementById("pipeline-status").innerText = "IDLE";
+                    document.getElementById("pipeline-status").style.color = "var(--dim)";
+                    document.getElementById("state-empty").style.display = "flex";
+                    document.getElementById("state-empty").innerText = "AWAITING INPUT";
+                    document.getElementById("status-panel").style.display = "none";
                 }
-                localStorage.removeItem("contentos_session_id");
-                currentSessionId = null;
-                resetLaunchButton();
-                document.getElementById("pipeline-status").innerText = "IDLE";
-                document.getElementById("pipeline-status").style.color = "var(--dim)";
-                document.getElementById("state-empty").style.display = "flex";
-                document.getElementById("state-empty").innerText = "AWAITING INPUT";
-                document.getElementById("status-panel").style.display = "none";
             });
         }
 
